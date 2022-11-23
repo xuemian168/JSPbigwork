@@ -1,11 +1,5 @@
 <%@ page import="cn.edu.hziee.model.User" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: hanhuixue
-  Date: 2022/11/23
-  Time: 3:40 下午
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.List" %>
 <%@ page pageEncoding="utf-8" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%request.setCharacterEncoding("utf-8");%>
