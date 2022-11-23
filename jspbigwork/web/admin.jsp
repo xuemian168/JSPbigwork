@@ -166,6 +166,3 @@ SessionID：<%= session.getId() %>
 %>
 </body>
 </html>
-
-
-
