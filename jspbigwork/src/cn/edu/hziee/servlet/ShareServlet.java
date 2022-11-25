@@ -25,7 +25,7 @@ public class ShareServlet extends HttpServlet {
         String[] field = {"id", "username", "contents"};
         String[] value = {id, thenew};
         db.sharepost(id, thenew);
-        request.getRequestDispatcher("admin.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/index.jsp").forward(request, response);
     }
 
 

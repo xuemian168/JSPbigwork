@@ -13,7 +13,8 @@ import java.sql.SQLException;
 public class PostServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        String content = request.getParameter("content");
+        String content1 = request.getParameter("content");
+        String content = content1.replace("'","\\'");
         String username = request.getParameter("username");
         DBUtils db = null;
         try {
@@ -26,7 +27,7 @@ public class PostServlet extends HttpServlet {
         String[] field = {"username", "contents"};
         String[] value = {username,content};
         db.insertData("contents", field, value);
-        request.getRequestDispatcher("./admin.jsp").forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
         PrintWriter out = response.getWriter();
     }
 

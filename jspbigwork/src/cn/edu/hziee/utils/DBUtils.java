@@ -162,10 +162,11 @@ public class DBUtils {
     public boolean editpost(String id, String thenew) {
         try {
             String sql = "";
-            sql = "update contents set contents = '" + thenew + "' where postid=" + id;
+            sql = "UPDATE contents SET contents = '" + thenew + "' WHERE postid='" + id+"'";
             System.out.println(sql);
             prestmt = conn.prepareStatement(sql);
-            rs = prestmt.executeQuery();
+            int rscount = prestmt.executeUpdate();
+            System.out.println(rscount);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -175,7 +176,7 @@ public class DBUtils {
     public boolean sharepost(String id, String thenew) {
         try {
             String sql = "";
-            sql = "update contents set share = '" + thenew + "' where postid=" + id;
+            sql = "update contents set share = " + thenew + " where postid='" + id+"'";
             System.out.println(sql);
             prestmt = conn.prepareStatement(sql);
             int rscount = prestmt.executeUpdate();

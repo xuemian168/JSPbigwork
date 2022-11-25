@@ -25,5 +25,7 @@
     <orderEntry type="module" module-name="JSP6" />
     <orderEntry type="library" name="Java EE 6-Java EE 6 (2)" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.0.3-bin" level="project" />
+    <orderEntry type="library" name="all" level="application" />
+    <orderEntry type="library" name="style" level="application" />
   </component>
 </module>

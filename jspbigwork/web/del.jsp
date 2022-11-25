@@ -17,7 +17,7 @@
     if (act != null) {
         out.print("已删除ID为"+act+"的文章");
         dbo.deleteData("contents","postid="+act);
-        response.sendRedirect("admin.jsp");
+        response.sendRedirect("admin/index.jsp");
     }else out.print("未知错误");
 %>
 </body>

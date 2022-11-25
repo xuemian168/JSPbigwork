@@ -17,7 +17,7 @@ public class RegServlet extends HttpServlet {
         String userName = (String) request.getParameter("userName");
         String pwd = (String) request.getParameter("pwd");
         String repwd = (String) request.getParameter("repwd");
-        if (pwd == repwd && pwd!=null) {
+        if (pwd.equals(repwd) && pwd!=null) {
             User user = new User(userName, pwd);
             System.out.println(user);
             DBUtils db = null;

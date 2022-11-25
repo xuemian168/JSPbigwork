@@ -23,20 +23,17 @@
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <style>
-    a{
+    a {
         color: black;
         text-decoration: none;
     }
-    td{
-        padding: 15px;
-    }
 </style>
 <%
-    Object user = session.getAttribute("user");
-    if (user !=null) {
-        User user1 = (User) user;
+    Object user = request.getAttribute("user");
+   if (request.getParameter("userName") != null) {
+        User user1 = new User();
+        session.setAttribute("userName", user1.getUserName());
 %>
-
 <%
     String username = user1.getUserName();
     System.out.println("用户名:" + username);
@@ -68,7 +65,7 @@
                 <li>
                     <hr class="dropdown-divider"/>
                 </li>
-                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout.jsp">注销</a></li>
+                <li><a class="dropdown-item" href="../logout.jsp">注销</a></li>
             </ul>
         </li>
     </ul>
@@ -183,26 +180,27 @@
                                 提交笔记
                             </div>
                             <div class="card-body">
-                                <form action="${pageContext.request.contextPath}/post.do" method="post">
-                                    <div class="mb-3">
-                                        <label for="username" class="form-label">笔记内容:</label>
-                                        <%if (isadmin) {%>
-                                        <input type="text" id="username" name="username" class="form-control"
-                                               value="<%=username%>"><br>
-                                        <%} else {%>
-                                        <input type="text" readonly="readonly" name="username" id="username"
-                                               class="form-control"
-                                               value="<%=username%>"><br>
-                                        <%}%>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="content" class="form-label">笔记内容:</label>
-                                        <textarea name="content" width="30px" height="80px"
-                                                  id="content" class="form-control" rows="4"></textarea>
-                                    </div>
-                                    <br>
-                                    <button type="submit" class="btn btn-primary">提交笔记</button>
+                                <%
+                                    String id = request.getParameter("id");
+                                    if (id != null) {
+                                        String[] field = {"postid", "username", "contents"};
+                                        List<String[]> vec = dbo.getaData(field, "select * from contents where postid=" + id);
+                                        for (int i = 0; i < vec.size(); i++) {
+                                            String ss[] = vec.get(i);
+                                %>
+                                <h1>正在编辑第<%=id%>笔记</h1>
+                                <form method="post" action="edit.do">
+                                    <p>
+                                    <h3>原内容</h3></p>
+                                    <%=ss[2]%><br>
+                                    <input type="hidden" name="id" id="id" value="<%=ss[0]%>">
+                                    <p>
+                                    <h3>新内容</h3></p>
+                                    <input type="text" name="new" id="new" placeholder="在次输入新内容">
+                                    <input type="submit">
                                 </form>
+                                <%}%>
+                                <%} else out.print("未知错误");%>
                                 <canvas width="100%" height="40">
                                 </canvas>
                             </div>
@@ -215,7 +213,7 @@
                             </div>
                             <div class="card-body">
                                 <%
-                                    String[] field = {"postid", "username", "contents","share"};
+                                    String[] field = {"postid", "username", "contents"};
                                     String sql = "";
 
                                     if (isadmin) {
@@ -232,23 +230,17 @@
                                         <tr class="table-primary">
                                             <td>ID</td>
                                             <td width="337" height="25"> 【<%=ss[0]%>】</td>
-                                            <td>
-                                                <%if (ss[3].equals("0")){%>
-                                                    <a href="${pageContext.request.contextPath}/share.jsp?id=<%=ss[0]%>&act=1">分享</a>
-                                                <%}else if (ss[3].equals("1")){%>
-                                                    <a href="${pageContext.request.contextPath}/share.jsp?id=<%=ss[0]%>&act=0">取消分享</a>
-                                                <%}%>
-                                            </td>
+                                            <td><a href="./share.jsp?id=<%=ss[0]%>">分享</a></td>
                                         </tr>
                                         <tr class="table-info">
                                             <td width="20">用户名</td>
                                             <td width="337" height="25"> 【<%=ss[1]%>】</td>
-                                            <td width="35"><a href="${pageContext.request.contextPath}/postmgt.jsp?id=<%=ss[0]%>">修改这条</a></td>
+                                            <td width="35"><a href="./postmgt.jsp?id=<%=ss[0]%>">修改这条</a></td>
                                         </tr>
                                         <tr>
                                             <td>笔记</td>
                                             <td height="100">【<%=ss[2]%>】</td>
-                                            <td width="20" rowspan="3"><a href="${pageContext.request.contextPath}/del.jsp?act=<%=ss[0]%>">删除这条</a></td>
+                                            <td width="20" rowspan="3"><a href="./del.jsp?act=<%=ss[0]%>">删除这条</a></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -269,7 +261,7 @@
                     <div>
                         <a href="#">用户协议</a>
                         ·
-                        <a href="#"><%=request.getSession()%></a>
+                        <a href="#">预留</a>
                     </div>
                 </div>
             </div>
@@ -279,8 +271,8 @@
 <%
     } else {
         System.out.println("session 获取失败");
-        System.out.println(request.getSession());
-        response.sendRedirect(request.getContextPath()+"/login.jsp");
+        System.out.println(user);
+        response.sendRedirect("../login.jsp");
         return;
     }
 %>

@@ -13,12 +13,17 @@
 </head>
 <body>
 <%
-    String act = request.getParameter("id");
-    if (act != null) {
-        out.print("已分享ID为"+act+"的文章");
-        dbo.sharepost(act,"1");
-        response.sendRedirect("admin.jsp");
-    }else out.print("未知错误");
+    String id = request.getParameter("id");
+    String act = request.getParameter("act");
+    if (id != null) {
+        out.print("已分享ID为" + act + "的文章");
+        if (act.equals("1")) {
+            dbo.sharepost(id, "1");
+        } else if (act.equals("0")) {
+            dbo.sharepost(id, "0");
+        }
+        response.sendRedirect("admin/index.jsp");
+    } else out.print("未知错误");
 %>
 </body>
 </html>

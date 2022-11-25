@@ -81,7 +81,7 @@
 <div class="topnav">
     <p><%=user1.getUserName().toUpperCase()%>笔记管理系统
     </p>
-    <a href="logout.jsp">登出</a>
+    <a href="${}logout.jsp">登出</a>
 
 
 </div>

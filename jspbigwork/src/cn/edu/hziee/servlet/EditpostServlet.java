@@ -12,7 +12,8 @@ import java.sql.SQLException;
 public class EditpostServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        String thenew = request.getParameter("new");
+        String thenew = request.getParameter("content");
+        thenew = thenew.replace("'","\\'");
         String id = request.getParameter("id");
         DBUtils db = null;
         try {
@@ -25,7 +26,7 @@ public class EditpostServlet extends HttpServlet {
         String[] field = {"id", "username", "contents"};
         String[] value = {id, thenew};
         db.editpost(id, thenew);
-        request.getRequestDispatcher("admin.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/index.jsp").forward(request, response);
     }
 
 
