@@ -146,7 +146,7 @@
         } else {
             System.out.println("session 获取失败");
             System.out.println(user);
-            response.sendRedirect("login.html");
+            response.sendRedirect("login.jsp");
             return;
         }
     %>

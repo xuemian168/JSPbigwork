@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
             User user = new User(userName,pwd);
             request.setAttribute("user",user);
 			System.out.println("登录成功");
-            RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("admin/index.jsp");
             rd.forward(request,response);
         }else{
 		    // 重定向：session设置属性或者url?参数1=参数值1&参数2=参数值1

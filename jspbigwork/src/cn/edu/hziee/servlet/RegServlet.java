@@ -34,7 +34,7 @@ public class RegServlet extends HttpServlet {
                 boolean checkLogin = db.checkedLogin(tablename, "username='" + userName + "'");
                 if (checkLogin) {
                     request.setAttribute("user", user);
-                    request.getRequestDispatcher("admin.jsp").forward(request, response);
+                    request.getRequestDispatcher("admin/index.jsp").forward(request, response);
                 } else
                     request.getRequestDispatcher("error.jsp?id=222").forward(request, response);
             } else {
