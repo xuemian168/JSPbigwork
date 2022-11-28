@@ -32,7 +32,7 @@
 %>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand ps-3" href="${pageContext.request.contextPath}/index.jsp">笔记管理系统后台</a>
+    <a class="navbar-brand ps-3" href="${pageContext.request.contextPath}/admin/index.jsp">笔记管理系统后台</a>
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
             class="fas fa-bars"></i></button>
     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -64,7 +64,7 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <div class="sb-sidenav-menu-heading">状态</div>
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/admin/index.jsp">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         仪表盘
                     </a>

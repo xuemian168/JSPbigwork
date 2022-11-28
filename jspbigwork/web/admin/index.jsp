@@ -185,12 +185,11 @@
                             <div class="card-body">
                                 <form action="${pageContext.request.contextPath}/post.do" method="post">
                                     <div class="mb-3">
-                                        <label for="username" class="form-label">笔记内容:</label>
                                         <%if (isadmin) {%>
                                         <input type="text" id="username" name="username" class="form-control"
                                                value="<%=username%>"><br>
                                         <%} else {%>
-                                        <input type="text" readonly="readonly" name="username" id="username"
+                                        <input type="text" readonly="readonly" hidden name="username" id="username"
                                                class="form-control"
                                                value="<%=username%>"><br>
                                         <%}%>
@@ -198,7 +197,7 @@
                                     <div class="mb-3">
                                         <label for="content" class="form-label">笔记内容:</label>
                                         <textarea name="content" width="30px" height="80px"
-                                                  id="content" class="form-control" rows="4"></textarea>
+                                                  id="content" class="form-control" rows="5"></textarea>
                                     </div>
                                     <br>
                                     <button type="submit" class="btn btn-primary">提交笔记</button>
