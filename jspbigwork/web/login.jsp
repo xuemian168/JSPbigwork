@@ -43,7 +43,7 @@
 
                             <div class="form-group">
                                 <label for="password">密码
-                                    <a href="forgot.html" class="float-right">
+                                    <a href="#" class="float-right">
                                         忘记密码?
                                     </a>
                                 </label>

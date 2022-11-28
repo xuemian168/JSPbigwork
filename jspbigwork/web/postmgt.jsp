@@ -1,5 +1,7 @@
 <%@ page import="cn.edu.hziee.model.User" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="java.lang.String" %>
+<%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2022/11/23
@@ -21,6 +23,20 @@
         User user1 = (User) user;
 %>
     <%
+
+    String currenturl = request.getQueryString();
+    System.out.println(currenturl);
+    String inj_str = "'|and|exec|insert|select|delete|update|count|*|chr|master|truncate|char|declare|;|or|-|+|%|,";
+    String[] inj_stra=inj_str.split("\\|");
+    boolean wrong = false;
+    for(String s: inj_stra){
+        if (currenturl.contains(s)) {
+            wrong = true;
+            break;
+        }
+    }
+    if (wrong){response.sendRedirect(request.getContextPath()+"/login.jsp");}
+
     String id = request.getParameter("id");
     if (id != null) {
         String[] field = {"postid", "username", "contents"};
