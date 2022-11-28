@@ -29,10 +29,9 @@
     }
 </style>
 <%
-    Object user = request.getAttribute("user");
-   if (request.getParameter("userName") != null) {
-        User user1 = new User();
-        session.setAttribute("userName", user1.getUserName());
+    Object user = session.getAttribute("user");
+    if (user !=null) {
+        User user1 = (User) user;
 %>
 <%
     String username = user1.getUserName();
@@ -177,14 +176,16 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-chart-area me-1"></i>
-                                提交笔记
+                                <%String id = request.getParameter("id");%>
+                                修改<%=id%>笔记
                             </div>
                             <div class="card-body">
                                 <%
-                                    String id = request.getParameter("id");
                                     if (id != null) {
                                         String[] field = {"postid", "username", "contents"};
-                                        List<String[]> vec = dbo.getaData(field, "select * from contents where postid=" + id);
+                                        String sql = "select postid,contents.username,contents from contents JOIN user01 ON user01.username=contents.username where (postid=" + id + " AND contents.username='"+ user1.getUserName()+"') or (postid = '"+id+"' and share = '1')";
+                                        System.out.println(sql);
+                                        List<String[]> vec = dbo.getaData(field, sql);
                                         for (int i = 0; i < vec.size(); i++) {
                                             String ss[] = vec.get(i);
                                 %>

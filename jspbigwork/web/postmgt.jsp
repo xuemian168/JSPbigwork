@@ -24,13 +24,15 @@
     String id = request.getParameter("id");
     if (id != null) {
         String[] field = {"postid", "username", "contents"};
-        List<String[]> vec = dbo.getaData(field, "select * from contents where postid=" + id);
+        String sql = "select postid,contents.username,contents from contents JOIN user01 ON user01.username=contents.username where (postid=" + id + " AND contents.username='"+ user1.getUserName()+"') or (postid = '"+id+"' and share = '1')";
+//        List<String[]> vec = dbo.getaData(field, "select * from contents where postid=" + id);
+        List<String[]> vec = dbo.getaData(field, sql);
         for (int i = 0; i < vec.size(); i++) {
             String ss[] = vec.get(i);
 %>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand ps-3" href="index.html">笔记管理系统后台</a>
+    <a class="navbar-brand ps-3" href="${pageContext.request.contextPath}/index.jsp">笔记管理系统后台</a>
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
             class="fas fa-bars"></i></button>
     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
